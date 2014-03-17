@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -42,6 +42,15 @@
           <h2>Drivers tracks info</h2>
         </div>
         <p class="lead">
+			<ul class="toc">
+				 <li>Track ID</li> 
+				 <li>Date</li>
+				 <li>Time In Minutes</li>
+				 <li>Time In Seconds</li>
+				 <li>AverageSpeed</li>
+				 <li>Distance</li>
+			</ul>
+		
 		<?php
 			$result = mysql_query("SELECT * FROM trackdata ORDER BY `AverageSpeed` ASC");
 			if (!$result) {
@@ -49,12 +58,22 @@
 				exit;
 			}
 			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)){
-			echo "<b>Track ID: ", $row["trackID"], "</br></b>";
-			echo "Date: ", $row["dateC"], "</br>";
-			echo "Time In Minutes: ", $row["timeInMinutes"], "</br>";
-			echo "Time In Seconds: ", $row["timeInSeconds"], "</br>";
-			echo "AverageSpeed : ", $row["averageSpeed"], "</br>";
-			echo "Distance: ", $row["distance"], "</br>";
+			
+			
+			
+			/*echo "<b>Track ID: ", $row["trackID"], "</b>";
+			echo "Date: ", $row["dateC"] ;
+			echo "Time In Minutes: ", $row["timeInMinutes"] ;
+			echo "Time In Seconds: ", $row["timeInSeconds"] ;
+			echo "AverageSpeed : ", $row["averageSpeed"];
+			echo "Distance: ", $row["distance"];
+			echo "</br>";*/
+			echo "<b>",$row["trackID"],"</b>";
+			echo "<div class='cont'>",$row["dateC"],"</div>";
+			echo "<div class='cont'>",$row["timeInMinutes"],"</div>";
+			echo "<div class='cont'>",$row["timeInSeconds"],"</div>";
+			echo "<div class='cont'>",$row["averageSpeed"],"</div>";
+			echo "<div class='cont'>",$row["distance"],"</div>";
 			echo "</br>";
 			}
 			mysql_free_result($result);
