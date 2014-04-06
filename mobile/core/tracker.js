@@ -290,7 +290,21 @@ $('#track_info').live('pageshow', function(){
 	
 	$("#track_info_info").html('Пройдено <strong>' + total_km_rounded + ' км</strong> за <strong>' + final_time_m + ' мин</strong> и <strong>' + final_time_s_rounded + ' сек</strong> </br>Средняя скорость <strong>' + aver_speed_km_h_rounded + ' км/ч</strong>');
 	
-	
+	//Определение даты
+	function formatDate(date) {
+	  var dd = date.getDate()
+	  if ( dd < 10 ) dd = '0' + dd;
+	  var mm = date.getMonth()+1
+	  if ( mm < 10 ) mm = '0' + mm;
+	  var yy = date.getFullYear() % 100;
+	  if ( yy < 10 ) yy = '0' + yy;
+	  return yy+'.'+mm+'.'+dd; 
+	}
+
+	var date_cur_raw = new Date();
+	var date_cur_raw_again = formatDate(date_cur_raw); 
+	var date_cur = date_cur_raw_again;
+	//	
 	var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.longitude);
 	
 	var myOptions = {
@@ -334,10 +348,12 @@ $('#track_info').live('pageshow', function(){
 			type: "POST",
 			dataType: "json",
 			data: {
+				trackID: key,
 				timeInMinutes: final_time_m,
 				timeInSeconds: final_time_s_rounded,
 				averageSpeed: aver_speed_km_h_rounded,
-				distance: total_km_rounded
+				distance: total_km_rounded,
+				dateC: date_cur
 			},
 			/*success: function(data, textStatus, jqXHR){alert(data, textStatus, jqXHR);}, */
 			/*success: function(data){
