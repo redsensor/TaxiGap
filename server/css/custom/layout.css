@@ -3,11 +3,40 @@ body {
   height: 100%;
 }
 
-/* Set the fixed height of the footer here */
+input[type="submit"] {
+margin:3px;
+}
+
+table {
+border-collapse: inherit;
+border-spacing: 1px;
+}
+
+table.tablesorter, table.tablesorter thead tr th, table.tablesorter tfoot tr th{
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size:11pt;
+}
+
+ul.toc {
+margin: 0;
+padding: 5px;
+}
+
+ul.toc li {
+display: inline-block;
+/*margin-right: 5px;*/
+border: 1px solid #000; 
+border-radius: 5px;
+padding: 3px; 
+width:130px;
+float: none;
+}
+
 #footer {
   position: fixed;
   height: 60px;
   bottom: 0px;
+  left: 0px;
   background-color: #f5f5f5;
   width:100%; 
   border-top:1px solid;
@@ -28,23 +57,8 @@ margin:80px 0 20px;
 }
 
 .lead {
-margin-bottom: 30%;
+margin-bottom: 10%;
 font-size: 16px;
-}
-
-ul.toc {
-margin: 0;
-padding: 5px;
-}
-
-ul.toc li {
-display: inline-block;
-/*margin-right: 5px;*/
-border: 1px solid #000; 
-border-radius: 5px;
-padding: 3px; 
-width:130px;
-float: none;
 }
 
 .cont {
@@ -54,21 +68,7 @@ width:130px;
 pading:3px;
 }
 
-input[type="submit"] {
-margin:3px;
-}
-
-table {
-border-collapse: inherit;
-border-spacing: 1px;
-}
-
-table.tablesorter, table.tablesorter thead tr th, table.tablesorter tfoot tr th{
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size:11pt;
-}
-
 .pager {
 float:left;
-margin-top: 10px;
+margin-top: 0px;
 }

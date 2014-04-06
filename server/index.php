@@ -55,6 +55,22 @@
           <h2>Сводная таблица информации о маршрутах</h2>
         </div>
         <div class="lead">
+			<div id="pager" class="pager">
+				<form>
+					<img src="css/tablesorter/first.png" class="first">
+					<img src="css/tablesorter/prev.png" class="prev">
+					<input type="css/text" class="pagedisplay">
+					<img src="css/tablesorter/next.png" class="next">
+					<img src="css/tablesorter/last.png" class="last">
+					<select class="pagesize">
+						<option value="10" selected="selected">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="40">50</option>
+					</select>
+				</form>
+			</div>
 		<table cellspacing="1" class="tablesorter">
 			<thead>
 				<tr> 
@@ -108,22 +124,6 @@
 				</tr> 
 			</tfoot> 
 		</table>
-	    <div id="pager" class="pager">
-				<form>
-					<img src="css/tablesorter/first.png" class="first">
-					<img src="css/tablesorter/prev.png" class="prev">
-					<input type="css/text" class="pagedisplay">
-					<img src="css/tablesorter/next.png" class="next">
-					<img src="css/tablesorter/last.png" class="last">
-					<select class="pagesize">
-						<option value="10">10</option>
-						<option value="20" selected="selected">20</option>
-						<option value="30">30</option>
-						<option value="40">40</option>
-						<option value="40">50</option>
-					</select>
-				</form>
-		</div>
 		</div>
   <!-- Fixed footer -->
     <div id="footer">
