@@ -28,7 +28,7 @@ margin:80px 0 20px;
 }
 
 .lead {
-margin-bottom: 60px;
+margin-bottom: 30%;
 font-size: 16px;
 }
 
@@ -38,13 +38,37 @@ padding: 5px;
 }
 
 ul.toc li {
-display: inline;
-margin-right: 5px; 
+display: inline-block;
+/*margin-right: 5px;*/
 border: 1px solid #000; 
+border-radius: 5px;
 padding: 3px; 
+width:130px;
+float: none;
 }
 
 .cont {
-display: inline;
-margin: 10px;
+display: inline-block;
+margin-left: 5px;
+width:130px;
+pading:3px;
+}
+
+input[type="submit"] {
+margin:3px;
+}
+
+table {
+border-collapse: inherit;
+border-spacing: 1px;
+}
+
+table.tablesorter, table.tablesorter thead tr th, table.tablesorter tfoot tr th{
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size:11pt;
+}
+
+.pager {
+float:left;
+margin-top: 10px;
 }

@@ -10,8 +10,21 @@
     <title>TaxiGap Panel</title>
 	
     <link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/tablesorter/jquery.tablesorter.css" rel="stylesheet">
+	<link href="css/tablesorter/jquery.tablesorter.pager.css" rel="stylesheet">
 	<link href="css/custom/layout.css" rel="stylesheet">
-
+	
+	<script src="js/jquery-1.8.3.min.js" charset="utf-8"></script>
+	<script src="js/tablesorter/jquery.metadata.js" charset="utf-8"></script>
+	<script src="js/tablesorter/jquery.tablesorter.js" charset="utf-8"></script>
+	<script src="js/tablesorter/jquery.tablesorter.pager.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("table")
+			.tablesorter({widthFixed: true, widgets: ['zebra']})
+			.tablesorterPager({container: $("#pager")});
+	});
+	</script>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -39,49 +52,79 @@
       <!-- Page content -->
       <div class="container">
         <div class="page-header">
-          <h2>Drivers tracks info</h2>
+          <h2>Сводная таблица информации о маршрутах</h2>
         </div>
-        <p class="lead">
-			<ul class="toc">
-				 <li>Track ID</li> 
-				 <li>Date</li>
-				 <li>Time In Minutes</li>
-				 <li>Time In Seconds</li>
-				 <li>AverageSpeed</li>
-				 <li>Distance</li>
-			</ul>
-		
+        <div class="lead">
+		<table cellspacing="1" class="tablesorter">
+			<thead>
+				<tr> 
+					<th>Идентификатор</th> 
+					<th>Дата</th> 
+					<th>Время в минутах</th> 
+					<th>Время в секундах</th> 
+					<th>Средняя скорость</th> 
+					<th>Расстояние</th> 
+				</tr> 
+			</thead> 		
 		<?php
-			$result = mysql_query("SELECT * FROM trackdata ORDER BY `AverageSpeed` ASC");
+			$result = mysql_query("SELECT * FROM trackdata ORDER BY `dateC` DESC");
 			if (!$result) {
 				echo 'Could not run query: ' . mysql_error();
 				exit;
 			}
+			echo "<tbody>";
 			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)){
-			
-			
-			
-			/*echo "<b>Track ID: ", $row["trackID"], "</b>";
-			echo "Date: ", $row["dateC"] ;
-			echo "Time In Minutes: ", $row["timeInMinutes"] ;
-			echo "Time In Seconds: ", $row["timeInSeconds"] ;
-			echo "AverageSpeed : ", $row["averageSpeed"];
-			echo "Distance: ", $row["distance"];
-			echo "</br>";*/
-			echo "<b>",$row["trackID"],"</b>";
-			echo "<div class='cont'>",$row["dateC"],"</div>";
-			echo "<div class='cont'>",$row["timeInMinutes"],"</div>";
-			echo "<div class='cont'>",$row["timeInSeconds"],"</div>";
-			echo "<div class='cont'>",$row["averageSpeed"],"</div>";
-			echo "<div class='cont'>",$row["distance"],"</div>";
-			echo "</br>";
+			echo "<tr>";
+			echo "<td>",$row["trackID"],"</td>";
+			echo "<td>",$row["dateC"],"</td>";
+			echo "<td>",$row["timeInMinutes"],"</td>";
+			echo "<td>",$row["timeInSeconds"],"</td>";
+			echo "<td>",$row["averageSpeed"],"</td>";
+			echo "<td>",$row["distance"],"</td>";
+			/*echo "<input type=\"submit\" value=\"Удалить\" onclick=\"location.href='';\" />";*/
+			echo "</tr>";
 			}
+			echo "</tbody>";
 			mysql_free_result($result);
+			
+		//Обработчик кнопки удаления
+			
+		if (isset($_POST['delid']))
+		{
+		  $delid=$_POST['delid'];
+		  mysql_query("DELETE FROM trackdata WHERE id=$delid;");
+		  header('Location: /index.php');
+		  exit;
+		}
 			?>
-		</p>
-        
-		
-      </div>
+			<tfoot>
+				<tr> 
+					<th>Идентификатор</th> 
+					<th>Дата</th> 
+					<th>Время в минутах</th> 
+					<th>Время в секундах</th> 
+					<th>Средняя скорость</th> 
+					<th>Расстояние</th> 
+				</tr> 
+			</tfoot> 
+		</table>
+	    <div id="pager" class="pager">
+				<form>
+					<img src="css/tablesorter/first.png" class="first">
+					<img src="css/tablesorter/prev.png" class="prev">
+					<input type="css/text" class="pagedisplay">
+					<img src="css/tablesorter/next.png" class="next">
+					<img src="css/tablesorter/last.png" class="last">
+					<select class="pagesize">
+						<option value="10">10</option>
+						<option value="20" selected="selected">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="40">50</option>
+					</select>
+				</form>
+		</div>
+		</div>
   <!-- Fixed footer -->
     <div id="footer">
       <div class="container">
