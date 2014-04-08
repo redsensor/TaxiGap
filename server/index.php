@@ -32,12 +32,12 @@
   </head>
 
   <body>
-	  <?php
+	<?php
 		ini_set('display_errors',1);
 		error_reporting(E_ALL);
 
 		require "config.php";
-		?>
+	?>
 		
       <!-- Fixed navbar -->
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,6 +71,19 @@
 					</select>
 				</form>
 			</div>
+				<?php 
+																	//Обработчик кнопки удаления
+					function TableTruncate() {
+					$trunc = mysql_query("TRUNCATE TABLE trackdata");
+					header("Location: index.php");
+					}
+					if (isset($_GET['truncate'])) {
+						TableTruncate();
+					}
+				?>
+					<div class="intrunc">
+						<a href="index.php?truncate" class="intruncbtn">Очистить таблицу</a>
+					</div>
 		<table cellspacing="1" class="tablesorter">
 			<thead>
 				<tr> 
@@ -103,15 +116,6 @@
 			echo "</tbody>";
 			mysql_free_result($result);
 			
-		//Обработчик кнопки удаления
-			
-		if (isset($_POST['delid']))
-		{
-		  $delid=$_POST['delid'];
-		  mysql_query("DELETE FROM trackdata WHERE id=$delid;");
-		  header('Location: /index.php');
-		  exit;
-		}
 			?>
 			<tfoot>
 				<tr> 
