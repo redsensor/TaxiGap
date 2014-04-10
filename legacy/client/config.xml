@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+		id="com.navigator.walkmeter"
+		version="0.0.1">
+	<name>WalkMeter</name>
+		<gap:platform name="android" />
+		<gap:splash src="splash.png" />
+		<icon src="icon.png" /> 
+	<preference name="phonegap-version" value="3.0.0" />
+</widget>

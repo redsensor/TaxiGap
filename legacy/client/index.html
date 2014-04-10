@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<link href="jquery/jquery.mobile.css" rel="stylesheet" type="text/css" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDa_rZemqT5tG3gnh2TvkuhOTm8lEWlFZE&sensor=false"></script>
+<script src="jquery/jquery-1.6.4.min.js" charset="utf-8"></script>
+<script src="jquery/jquery.mobile.js" charset="utf-8"></script>
+<script src="core/tracker.js" charset="utf-8"></script>
+<script src="core/json.js" charset="utf-8"></script>
+<script>
+document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        navigator.splashscreen.show();
+    }
+</script>
+
+<meta charset=utf-8 />
+
+<title>Walk Meter на Phonegap</title>
+
+</head>
+<body>
+
+<!-- Главная страница -->
+<div data-role="page" id="home">
+
+	<div data-role="header" data-theme="b" data-content-theme="d">
+	
+		<h1>Главная</h1>
+	</div>
+	<div data-role="navbar">
+		<ul>
+			<li><a href="#home" data-transition="none" data-icon="home" data-theme="b" data-content-theme="d">Главная</a></li>
+			<li><a href="#startTracking" data-transition="none" data-icon="search" data-theme="b" data-content-theme="d">Трекинг</a></li>
+			<li><a href="#history" data-transition="none" data-icon="grid" data-theme="b" data-content-theme="d">История</a></li>
+			<li><a href="#myposition" data-transition="none" data-icon="info" data-theme="b" data-content-theme="d">Мой Путь</a></li>
+		</ul>
+	</div>
+	
+
+	<div data-role="content">
+			<!--<button id="home_network_button" data-icon="check">Internet Connection Enabled</button>-->
+		<div data-role="collapsible" data-theme="e" data-content-theme="d" id="accordion_guide">
+			<h3>Инструкция&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+			<p>Welcome to the <b>Walk Meter</b>.</br></br>
+			<b><i>Walk Track</i></b></br>
+				<ul>
+				<li>By clicking <b>Walk Track</b> you can record your workouts using the GPS feature on your phone.
+				Firstly input name of your walk in the Walk ID/Name, then tap on <b>Start Tracking</b> button. 
+				<b>Please make sure that your GPS is turned on and signal is good!</b>
+				Congratulations! Your walk has begun! Now you can go and Walk Meter will track your trip.
+				If you want to stop track your walk simply tap on <b>Stop Tracking</b> button. 
+				Your every walk will be written into <b>History</b> and you can always look at it.</br>
+				</ul>
+			<b><i>History</i></b></br>
+				<ul>
+				<li>Every walk is stored in <b>History</b>. Tap on walk to see information about it and look on the route. 
+				If you have many walks you can use <b>Search</b> to find any of it. 
+				<b>Attention! Necessarily check your internet connection, it needed for Google Maps downloading. 
+				But if you loaded Google Maps previously you can ignore this point.</b></br>
+				</ul>
+			<b><i>My position</i></b></br>
+				<ul>
+				<li>In <b>My position</b> you can overview map and even track your way in real time! 
+				To start tracking switch tumbler on, marker will be appeared on the map. 
+				When you move marker show your current position on the map. To stop tracking switch tumbler off.
+				<b>Please make sure that you have internet connection on, it needed for Google Maps downloading. 
+				But if you loaded Google Maps previously you can ignore this point.</b></br>
+				</ul>
+			<b><i>Main</i></b></br>
+				<ul>
+				<li><b>Main</b> page has several buttons:</br>
+				<b>Clear local storage</b> - remove all records in <b>History</b>.</br>
+				<b>Load Sample GPS Data</b> - add sample record in <b>History</b>.</br>
+				<b>Show Credits</b> - short information about developer.</br>
+				</ul>
+			I hope that <b>Walk Meter</b> will be hepful for you. Enjoy!
+			</p>
+		</div>
+		<button id="home_clearstorage_button">Очистить историю</button>
+		<button id="home_seedgps_button">Загрузить образец</button>		
+		<button id="open_popup" rel="popup_content">Информация о разработчике</button>
+			<div class="overlay"></div>
+			<div class="popup" id="popup_content">
+				<span class="close">X</span>
+				</br><b>Разработал Владислав Гасан.</b></br></br>
+				Свои пожелания и предложения высылайте на электронный ящик: 
+				<a href="mailto:vladislav.gasan@gmail.com">vladislav.gasan@gmail.com</a> 
+			</div>
+			<script>
+				$('#open_popup').click(function() {
+					var popup_id = $('#' + $(this).attr("rel"));
+					$(popup_id).show();
+					$('.overlay').show();
+				})
+				$('.popup .close, .overlay').click(function() {
+					$('.overlay, .popup').hide();
+				})
+			</script>
+	</div>
+
+
+</div>
+
+<!-- Трекинг -->
+	
+<div data-role="page" id="startTracking">
+
+	<div data-role="header" data-theme="b" data-content-theme="d">
+		<h1>Трекинг</h1>
+	</div>	
+	
+		<div data-role="navbar">
+			<ul>
+			<li><a href="#home" data-transition="none" data-icon="home" data-theme="b" data-content-theme="d">Главная</a></li>
+			<li><a href="#startTracking" data-transition="none" data-icon="search" data-theme="b" data-content-theme="d">Трекинг</a></li>
+			<li><a href="#history" data-transition="none" data-icon="grid" data-theme="b" data-content-theme="d">История</a></li>
+			<li><a href="#myposition" data-transition="none" data-icon="info" data-theme="b" data-content-theme="d">Мой Путь</a></li>
+			</ul>
+		</div>
+	
+
+	<div data-role="content">	
+		<p id="startTracking_status"></p>
+			<div data-role="fieldcontain" class="ui-hide-label">
+				<label for="track_id">Название:</label>
+				<input type="text" name="track_id" id="track_id" placeholder="Введите название..."/>
+			</div>
+
+		<button data-role="button" id="startTracking_start">Начать Трекинг</button>
+		<button data-role="button" id="startTracking_stop">Завершить Трекинг</button>  
+		
+				<p id="startTracking_info"></p>
+		
+		
+	</div>
+
+
+</div>
+
+<!-- История -->
+<div data-role="page" id="history">
+
+	<div data-role="header" data-theme="b" data-content-theme="d">
+		<h1>История</h1>
+	</div>	
+        <div data-role="navbar" >
+            <ul>
+            <li><a href="#home" data-transition="none" data-icon="home" data-theme="b" data-content-theme="d">Главная</a></li>
+			<li><a href="#startTracking" data-transition="none" data-icon="search" data-theme="b" data-content-theme="d">Трекинг</a></li>
+			<li><a href="#history" data-transition="none" data-icon="grid" data-theme="b" data-content-theme="d">История</a></li>
+			<li><a href="#myposition" data-transition="none" data-icon="info" data-theme="b" data-content-theme="d">Мой Путь</a></li>
+            </ul>
+        </div>
+
+    <div data-role="content">	
+        <p id="tracks_recorded"></p>
+        
+        <ul data-role="listview" data-filter="true" data-filter-placeholder="Найти записи..." id="history_tracklist">
+        </ul>
+    </div>
+
+
+</div>
+
+<!-- Просмотр Маршрута -->
+<div data-role="page" id="track_info">
+
+	<div data-role="header"  data-theme="b" data-content-theme="d">
+		<h1>Просмотреть Маршрут</h1>
+	</div>
+	
+		<div data-role="navbar">
+			<ul>
+			<li><a href="#home" data-transition="none" data-icon="home" data-theme="b" data-content-theme="d">Главная</a></li>
+			<li><a href="#startTracking" data-transition="none" data-icon="search" data-theme="b" data-content-theme="d">Трекинг</a></li>
+			<li><a href="#history" data-transition="none" data-icon="grid" data-theme="b" data-content-theme="d">История</a></li>
+			<li><a href="#myposition" data-transition="none" data-icon="info" data-theme="b" data-content-theme="d">Мой Путь</a></li>
+			</ul>
+		</div>
+	
+
+	<div data-role="content">	
+		<p id="track_info_info"></p>
+		
+		<div id="map_canvas" class="map_canvas"></div>
+			<div class="save-route"><div data-role="button" data-theme="e" data-content-theme="d" id="sendRoute">Отправить</div>
+			</div>
+		
+	</div>
+
+
+</div>
+
+
+<!-- Мой путь -->
+
+<div data-role="page" id="myposition">
+
+	<div data-role="header"  data-theme="b" data-content-theme="d">
+		<h1>Мой путь</h1>
+	</div>
+	
+		<div data-role="navbar">
+			<ul>
+			<li><a href="#home" data-transition="none" data-icon="home" data-theme="b" data-content-theme="d">Главная</a></li>
+			<li><a href="#startTracking" data-transition="none" data-icon="search" data-theme="b" data-content-theme="d">Трекинг</a></li>
+			<li><a href="#history" data-transition="none" data-icon="grid" data-theme="b" data-content-theme="d">История</a></li>
+			<li><a href="#myposition" data-transition="none" data-icon="info" data-theme="b" data-content-theme="d">Мой Путь</a></li>
+			</ul>
+		</div>
+	
+
+	<div data-role="content">	
+	  <div id="posmarker" style="position:absolute;top:100px;bottom:0px;left:0;width:100%;height:80%;"></div>
+	 <!--<div style="position:absolute; top:100px; margin: auto;height: 45px !important; width: 130px !important;"><input type="button" value="Refresh" onclick="updateMarker()"/></div>-->
+	  <div style="margin: auto; width: 130px !important;" class="containing-element">
+			<label for="flip-min"></label>
+			<select name="flip-min" id="flip-min" data-role="slider">
+		<option value="off" selected="selected">Трекинг Отключен</option>
+		<option value="on">Трекинг Включен</option>
+			</select>
+		</div>
+	</div>
+
+
+</div>
+
+</body>
+</html>
