@@ -9,6 +9,7 @@ vn9rhnph*/
 
 /*var_dump($_POST);*/
 $trackID = $_POST['trackID'];
+$uuid = $_POST['uuid'];
 $timeInMinutes = $_POST['timeInMinutes'];
 $timeInSeconds = $_POST['timeInSeconds'];
 $averageSpeed = $_POST['averageSpeed'];
@@ -20,8 +21,9 @@ echo $timeInMinutes;
 echo $averageSpeed;
 echo $distance;
 echo $dateC;
+echo $uuid;
 
-$result = mysql_query("INSERT INTO `trackdata` (`trackID`, `timeInMinutes`, `timeInSeconds`, `averageSpeed`, `distance`, `dateC`) VALUES ('$trackID','$timeInMinutes','$timeInSeconds','$averageSpeed','$distance','$dateC')"); 
+$result = mysql_query("INSERT INTO `trackdata` (`trackID`, `uuid`, `timeInMinutes`, `timeInSeconds`, `averageSpeed`, `distance`, `dateC`) VALUES ('$trackID','$uuid','$timeInMinutes','$timeInSeconds','$averageSpeed','$distance','$dateC')"); 
 /*if($result == TRUE)             {
                          echo "Данные добавлены!";
                                   }

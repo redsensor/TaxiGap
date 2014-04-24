@@ -6,6 +6,10 @@
 		version="0.0.1">
 	<name>TaxiGap</name>
 		<gap:platform name="android" />
+		<gap:plugin name="org.apache.cordova.splashscreen" />
+		<gap:plugin name="org.apache.cordova.device" />
+		<preference name="AutoHideSplashScreen" value="false" />
+		<preference name="SplashScreenDelay" value="4000"/>
 		<gap:splash src="splash/splash.png" />
 		<icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
 		<icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />

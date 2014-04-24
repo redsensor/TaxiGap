@@ -1,3 +1,16 @@
+devuuid = 2;
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	console.log("Device is ready");
+	/*devuuid = device.uuid;*/
+	var element = document.getElementById('devProps');
+	element.innerHTML = 'Идентификатор устройства: ' + device.uuid + '<br />';
+}
+	
+/*var devuuid = $("p#devProps");*/
+		
 function gps_distance(lat1, lon1, lat2, lon2)
 {
 	// http://www.movable-type.co.uk/scripts/latlong.html
@@ -15,7 +28,7 @@ function gps_distance(lat1, lon1, lat2, lon2)
     return d;
 }
 
-document.addEventListener("deviceready", function(){
+/*document.addEventListener("deviceready", function(){
 	
 	if(navigator.network.connection.type == Connection.NONE){
 		$('button#home_network_button').text('No Internet Access')
@@ -30,6 +43,19 @@ document.addEventListener("deviceready", function(){
 	}
 
 });
+
+
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+        var element = document.getElementById('deviceProps');
+
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+                            'Device PhoneGap: ' + device.phonegap + '<br />' + 
+                            'Device Platform: ' + device.platform + '<br />' + 
+                            'Device UUID: '     + device.uuid     + '<br />' +
+                            'Device Version: '  + device.version  + '<br />'; 
+   }*/
+
 
 
 var track_id = '';      // Название маршрута
@@ -343,18 +369,21 @@ $('#track_info').live('pageshow', function(){
 		aver_speed_km_h_rounded_str = JSON.stringify(aver_speed_km_h_rounded);		
 		total_km_rounded_str = JSON.stringify(total_km_rounded);*/
 		
-		$.ajax({
-			url: "http://test.whirlware.biz/server/handler.php",
-			type: "POST",
-			dataType: "json",
-			data: {
+		var data = {
 				trackID: key,
+				uuid: devuuid,
 				timeInMinutes: final_time_m,
 				timeInSeconds: final_time_s_rounded,
 				averageSpeed: aver_speed_km_h_rounded,
 				distance: total_km_rounded,
 				dateC: date_cur
-			},
+			};
+		
+		$.ajax({
+			url: "http://test.whirlware.biz/server/handler.php",
+			type: "POST",
+			dataType: "json",
+			data: data,
 			/*success: function(data, textStatus, jqXHR){alert(data, textStatus, jqXHR);}, */
 			/*success: function(data){
 				console.log(data);

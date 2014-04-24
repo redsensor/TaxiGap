@@ -87,7 +87,8 @@
 		<table cellspacing="1" class="tablesorter">
 			<thead>
 				<tr> 
-					<th>Идентификатор</th> 
+					<th>Маршрут</th> 
+					<th>Идентификатор</th>
 					<th>Дата</th> 
 					<th>Время в минутах</th> 
 					<th>Время в секундах</th> 
@@ -105,21 +106,22 @@
 			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)){
 			echo "<tr>";
 			echo "<td>",$row["trackID"],"</td>";
+			echo "<td>",$row["uuid"],"</td>";
 			echo "<td>",$row["dateC"],"</td>";
 			echo "<td>",$row["timeInMinutes"],"</td>";
 			echo "<td>",$row["timeInSeconds"],"</td>";
 			echo "<td>",$row["averageSpeed"],"</td>";
 			echo "<td>",$row["distance"],"</td>";
-			/*echo "<input type=\"submit\" value=\"Удалить\" onclick=\"location.href='';\" />";*/
 			echo "</tr>";
 			}
 			echo "</tbody>";
 			mysql_free_result($result);
 			
-			?>
+		?>
 			<tfoot>
 				<tr> 
-					<th>Идентификатор</th> 
+					<th>Маршрут</th> 
+					<th>Идентификатор</th>
 					<th>Дата</th> 
 					<th>Время в минутах</th> 
 					<th>Время в секундах</th> 

@@ -1,25 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-<link href="jquery/jquery.mobile.css" rel="stylesheet" type="text/css" />
-<link href="style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDa_rZemqT5tG3gnh2TvkuhOTm8lEWlFZE&sensor=false"></script>
-<script src="jquery/jquery-1.6.4.min.js" charset="utf-8"></script>
-<script src="jquery/jquery.mobile.js" charset="utf-8"></script>
-<script src="core/tracker.js" charset="utf-8"></script>
-<script src="core/json.js" charset="utf-8"></script>
-<script>
-document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        navigator.splashscreen.show();
-    }
-</script>
+	<head>
+	<link href="jquery/jquery.mobile.css" rel="stylesheet" type="text/css" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script src="phonegap.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDa_rZemqT5tG3gnh2TvkuhOTm8lEWlFZE&sensor=false"></script>
+	<script src="jquery/jquery-1.6.4.min.js" charset="utf-8"></script>
+	<script src="jquery/jquery.mobile.js" charset="utf-8"></script>
+	<script src="core/tracker.js" charset="utf-8"></script>
+	<script src="core/json.js" charset="utf-8"></script>
 
-<meta charset=utf-8 />
+	<meta charset=utf-8 />
 
-<title>Walk Meter на Phonegap</title>
+	<title>Walk Meter на Phonegap</title>
 
-</head>
+	</head>
 <body>
 
 <!-- Главная страница -->
@@ -98,6 +93,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 					$('.overlay, .popup').hide();
 				})
 			</script>
+		<p id="devProps">Загрузка информации об устройстве...</p>
 	</div>
 
 
