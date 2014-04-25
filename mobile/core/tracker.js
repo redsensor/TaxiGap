@@ -1,10 +1,10 @@
-devuuid = 2;
+var devuuid;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 	console.log("Device is ready");
-	/*devuuid = device.uuid;*/
+	devuuid = device.uuid;
 	var element = document.getElementById('devProps');
 	element.innerHTML = 'Идентификатор устройства: ' + device.uuid + '<br />';
 }

@@ -7,7 +7,7 @@
     <meta name="description" content="TaxiGap">
     <meta name="author" content="Vladislav Gasan">
 
-    <title>TaxiGap Panel</title>
+    <title>Панель управления TaxiGap</title>
 	
     <link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/tablesorter/jquery.tablesorter.css" rel="stylesheet">
@@ -43,7 +43,7 @@
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">TaxiGap Panel</a>
+            <a class="navbar-brand" href="index.php">Панель управления TaxiGap</a>
           </div>
           </div>
         </div>
@@ -93,7 +93,8 @@
 					<th>Время в минутах</th> 
 					<th>Время в секундах</th> 
 					<th>Средняя скорость</th> 
-					<th>Расстояние</th> 
+					<th>Расстояние</th>
+					<th>Стоимость топлива</th> 
 				</tr> 
 			</thead> 		
 		<?php
@@ -112,6 +113,7 @@
 			echo "<td>",$row["timeInSeconds"],"</td>";
 			echo "<td>",$row["averageSpeed"],"</td>";
 			echo "<td>",$row["distance"],"</td>";
+			echo "<td>",round($row["distance"] * 1.2, 2)," грн</td>";
 			echo "</tr>";
 			}
 			echo "</tbody>";
@@ -127,10 +129,24 @@
 					<th>Время в секундах</th> 
 					<th>Средняя скорость</th> 
 					<th>Расстояние</th> 
+					<th>Стоимость топлива</th> 
 				</tr> 
 			</tfoot> 
 		</table>
+			<div class="benzcost"><b>Общая стоимость топлива: </b>
+				<?php 
+					$benzcost = mysql_query("SELECT ROUND(SUM(distance)*1.2, 2) FROM trackdata");
+						if (!$result) {
+							echo 'Could not run query: ' . mysql_error();
+							exit;
+						}
+					$benzrow = mysql_fetch_array($benzcost, MYSQL_ASSOC);
+					echo implode(PHP_EOL, $benzrow);
+					
+				?>
+			грн &nbsp;</div>
 		</div>
+			
   <!-- Fixed footer -->
     <div id="footer">
       <div class="container">

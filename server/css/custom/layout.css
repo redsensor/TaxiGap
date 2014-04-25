@@ -88,7 +88,7 @@ a.intruncbtn:hover {
 
 .container {
   width: auto;
-  max-width: 960px;
+  max-width: 1100px;
   padding: 0 15px;
 }
 .container .text-muted {
@@ -120,4 +120,15 @@ float: left;
 .intrunc {
 text-align:right;
 margin-right: 0px;
+}
+
+.benzcost {
+text-align:right;
+margin-right: 0px;
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+font-size: 11pt !important;
+background-color: #e6EEEE;
+border-collapse: inherit;
+border-spacing: 1px;
+border: 1px solid #FFF;
 }
