@@ -380,7 +380,7 @@ $('#track_info').live('pageshow', function(){
 			};
 		
 		$.ajax({
-			url: "http://test.whirlware.biz/server/handler.php",
+			url: "http://your_url",
 			type: "POST",
 			dataType: "json",
 			data: data,
