@@ -344,7 +344,7 @@ $('#track_info').live('pageshow', function(){
 		total_km_rounded_str = JSON.stringify(total_km_rounded);*/
 		
 		$.ajax({
-			url: "http://test.whirlware.biz/server/handler.php",
+			url: "http://your_url",
 			type: "POST",
 			dataType: "json",
 			data: {
